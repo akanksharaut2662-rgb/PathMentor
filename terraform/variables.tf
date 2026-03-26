@@ -55,7 +55,7 @@ variable "ec2_ami_id" {
 variable "lab_role_arn" {
   description = "ARN of the AWS Academy LabRole IAM role"
   type        = string
-  default     = "arn:aws:iam::ACCOUNT_ID:role/LabRole"
+  default     = "arn:aws:iam::384601337267:role/fcscrs_IsbUsersPS"
   # IMPORTANT: Replace ACCOUNT_ID with your actual AWS account ID before deploying.
   # Find it in: AWS Console → top-right account menu → Account ID
 }
