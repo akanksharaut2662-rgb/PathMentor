@@ -15,11 +15,12 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
+}
 
-  # AWS Academy Learner Lab — uses the LabRole credentials injected via environment.
-  # Do NOT hardcode access keys here. Set via:
-  #   export AWS_ACCESS_KEY_ID=...
-  #   export AWS_SECRET_ACCESS_KEY=...
-  #   export AWS_SESSION_TOKEN=...
-  # (copy from the Learner Lab "AWS Details" panel)
+# Auto-construct the LabRole ARN using the current account ID.
+# This avoids having to hardcode the account ID anywhere.
+data "aws_caller_identity" "main" {}
+
+locals {
+  lab_role_arn = aws_iam_role.lambda_role.arn
 }

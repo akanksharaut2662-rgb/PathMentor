@@ -27,7 +27,7 @@ from pathlib import Path
 def parse_args():
     parser = argparse.ArgumentParser(description="Seed PathMentor DynamoDB table")
     parser.add_argument("--table", default=os.environ.get("EXPERIENCES_TABLE", "pathmentor-experiences"))
-    parser.add_argument("--region", default=os.environ.get("AWS_REGION", "us-east-1"))
+    parser.add_argument("--region", default=os.environ.get("AWS_REGION", "ca-central-1"))
     parser.add_argument("--clear", action="store_true", help="Clear all existing items before seeding")
     parser.add_argument("--seed-file", default=None, help="Path to experiences.json (auto-detected if not set)")
     return parser.parse_args()

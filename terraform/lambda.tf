@@ -56,7 +56,7 @@ data "archive_file" "generate_plan" {
 
 resource "aws_lambda_function" "get_experiences" {
   function_name    = "${var.project_name}-get-experiences"
-  role             = var.lab_role_arn
+  role             = local.lab_role_arn
   handler          = "get_experiences.handler"
   runtime          = "python3.11"
   filename         = data.archive_file.get_experiences.output_path
@@ -71,7 +71,12 @@ resource "aws_lambda_function" "get_experiences" {
     }
   }
 
-  depends_on = [aws_cloudwatch_log_group.lambda_get_experiences]
+  depends_on = [
+    aws_iam_role.lambda_role,
+    aws_iam_role_policy_attachment.lambda_logs,
+    aws_iam_role_policy_attachment.lambda_dynamodb,
+    aws_cloudwatch_log_group.lambda_get_experiences
+  ]
 
   tags = {
     Project   = var.project_name
@@ -88,7 +93,7 @@ resource "aws_cloudwatch_log_group" "lambda_get_experiences" {
 
 resource "aws_lambda_function" "post_experience" {
   function_name    = "${var.project_name}-post-experience"
-  role             = var.lab_role_arn
+  role             = local.lab_role_arn
   handler          = "post_experience.handler"
   runtime          = "python3.11"
   filename         = data.archive_file.post_experience.output_path
@@ -103,7 +108,12 @@ resource "aws_lambda_function" "post_experience" {
     }
   }
 
-  depends_on = [aws_cloudwatch_log_group.lambda_post_experience]
+  depends_on = [
+  aws_iam_role.lambda_role,
+  aws_iam_role_policy_attachment.lambda_logs,
+  aws_iam_role_policy_attachment.lambda_dynamodb,
+  aws_cloudwatch_log_group.lambda_post_experience
+  ]
 
   tags = {
     Project   = var.project_name
@@ -120,7 +130,7 @@ resource "aws_cloudwatch_log_group" "lambda_post_experience" {
 
 resource "aws_lambda_function" "get_insights" {
   function_name    = "${var.project_name}-get-insights"
-  role             = var.lab_role_arn
+  role             = local.lab_role_arn
   handler          = "get_insights.handler"
   runtime          = "python3.11"
   filename         = data.archive_file.get_insights.output_path
@@ -135,7 +145,12 @@ resource "aws_lambda_function" "get_insights" {
     }
   }
 
-  depends_on = [aws_cloudwatch_log_group.lambda_get_insights]
+  depends_on = [
+  aws_iam_role.lambda_role,
+  aws_iam_role_policy_attachment.lambda_logs,
+  aws_iam_role_policy_attachment.lambda_dynamodb,
+  aws_cloudwatch_log_group.lambda_get_insights
+  ]
 
   tags = {
     Project   = var.project_name
@@ -152,7 +167,7 @@ resource "aws_cloudwatch_log_group" "lambda_get_insights" {
 
 resource "aws_lambda_function" "generate_plan" {
   function_name    = "${var.project_name}-generate-plan"
-  role             = var.lab_role_arn
+  role             = local.lab_role_arn
   handler          = "generate_plan.handler"
   runtime          = "python3.11"
   filename         = data.archive_file.generate_plan.output_path
@@ -165,10 +180,16 @@ resource "aws_lambda_function" "generate_plan" {
       EXPERIENCES_TABLE = aws_dynamodb_table.experiences.name
       AWS_REGION_NAME   = var.aws_region
       BEDROCK_MODEL_ID  = var.bedrock_model_id
+      BEDROCK_REGION    = var.bedrock_region
     }
   }
 
-  depends_on = [aws_cloudwatch_log_group.lambda_generate_plan]
+  depends_on = [
+  aws_iam_role.lambda_role,
+  aws_iam_role_policy_attachment.lambda_logs,
+  aws_iam_role_policy_attachment.lambda_dynamodb,
+  aws_cloudwatch_log_group.lambda_generate_plan
+  ]
 
   tags = {
     Project   = var.project_name

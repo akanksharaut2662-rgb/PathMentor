@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy all resources"
   type        = string
-  default     = "us-east-1"
+  default     = "ca-central-1"
 }
 
 variable "project_name" {
@@ -20,6 +20,12 @@ variable "dynamodb_table_name" {
   description = "DynamoDB table name for experiences"
   type        = string
   default     = "pathmentor-experiences"
+}
+
+variable "bedrock_region" {
+  description = "Region for Amazon Bedrock — must be us-east-1 as ca-central-1 does not support Claude models"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "bedrock_model_id" {
@@ -46,16 +52,10 @@ variable "ec2_instance_type" {
   default     = "t3.micro"
 }
 
-variable "ec2_ami_id" {
-  description = "AMI ID for EC2 seed runner (Amazon Linux 2023, us-east-1)"
-  type        = string
-  default     = "ami-0c02fb55956c7d316" # Amazon Linux 2023 us-east-1
-}
-
 variable "lab_role_arn" {
-  description = "ARN of the AWS Academy LabRole IAM role"
+  description = "ARN of the AWS Academy LabRole IAM role. Leave as empty string to auto-detect from account ID."
   type        = string
-  default     = "arn:aws:iam::384601337267:role/fcscrs_IsbUsersPS"
-  # IMPORTANT: Replace ACCOUNT_ID with your actual AWS account ID before deploying.
-  # Find it in: AWS Console → top-right account menu → Account ID
+  default     = ""
+  # If empty, Terraform will construct it automatically using your account ID.
+  # Only set this manually if auto-detection fails.
 }

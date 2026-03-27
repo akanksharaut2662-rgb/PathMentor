@@ -33,7 +33,7 @@ def convert_decimals(obj):
 
 
 def get_bedrock_client():
-    region = os.environ.get("AWS_REGION", "us-east-1")
+    region = os.environ.get("BEDROCK_REGION", "ca-central-1")
     return boto3.client("bedrock-runtime", region_name=region)
 
 

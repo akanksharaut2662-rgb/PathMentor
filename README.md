@@ -149,7 +149,7 @@ Or seed locally:
 pip install boto3
 python3 backend/seed/seed_data.py \
   --table pathmentor-experiences \
-  --region us-east-1
+  --region ca-central-1
 ```
 
 ### Step 7 — Open your app

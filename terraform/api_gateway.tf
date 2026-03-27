@@ -263,18 +263,12 @@ resource "aws_api_gateway_stage" "prod" {
   rest_api_id   = aws_api_gateway_rest_api.pathmentor_api.id
   stage_name    = "prod"
 
-  # Enable CloudWatch access logging for API Gateway
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api_gateway.arn
-  }
+  # NOTE: access_log_settings removed — AWS Academy Learner Lab does not allow
+  # setting the CloudWatch Logs role ARN in account settings, which is required
+  # for API Gateway access logging. Lambda CloudWatch logs still capture all invocations.
 
   tags = {
     Project   = var.project_name
     ManagedBy = "Terraform"
   }
-}
-
-resource "aws_cloudwatch_log_group" "api_gateway" {
-  name              = "/aws/apigateway/${var.project_name}"
-  retention_in_days = 14
 }

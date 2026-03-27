@@ -4,10 +4,10 @@ import os
 def get_dynamodb_resource():
     """
     Returns a boto3 DynamoDB resource.
-    Uses the AWS region from environment variable or defaults to us-east-1.
+    Uses the AWS region from environment variable or defaults to ca-central-1.
     In Lambda, credentials are automatically provided via the execution role (LabRole).
     """
-    region = os.environ.get("AWS_REGION", "us-east-1")
+    region = os.environ.get("AWS_REGION", "ca-central-1")
     return boto3.resource("dynamodb", region_name=region)
 
 def get_experiences_table():

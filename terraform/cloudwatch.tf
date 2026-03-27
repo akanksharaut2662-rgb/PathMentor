@@ -1,5 +1,6 @@
 # ── CloudWatch Dashboard ──────────────────────────────────────────────────────
 
+/*
 resource "aws_cloudwatch_dashboard" "pathmentor" {
   dashboard_name = "${var.project_name}-dashboard"
 
@@ -8,9 +9,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "Lambda Invocations"
-          period = 300
-          stat   = "Sum"
+          title   = "Lambda Invocations"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Sum"
           metrics = [
             ["AWS/Lambda", "Invocations", "FunctionName", aws_lambda_function.get_experiences.function_name],
             ["AWS/Lambda", "Invocations", "FunctionName", aws_lambda_function.post_experience.function_name],
@@ -22,9 +24,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "Lambda Errors"
-          period = 300
-          stat   = "Sum"
+          title   = "Lambda Errors"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Sum"
           metrics = [
             ["AWS/Lambda", "Errors", "FunctionName", aws_lambda_function.get_experiences.function_name],
             ["AWS/Lambda", "Errors", "FunctionName", aws_lambda_function.post_experience.function_name],
@@ -36,9 +39,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "Lambda Duration (ms)"
-          period = 300
-          stat   = "Average"
+          title   = "Lambda Duration (ms)"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Average"
           metrics = [
             ["AWS/Lambda", "Duration", "FunctionName", aws_lambda_function.generate_plan.function_name],
             ["AWS/Lambda", "Duration", "FunctionName", aws_lambda_function.get_insights.function_name],
@@ -48,9 +52,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "DynamoDB Read/Write Capacity"
-          period = 300
-          stat   = "Sum"
+          title   = "DynamoDB Read/Write Capacity"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Sum"
           metrics = [
             ["AWS/DynamoDB", "ConsumedReadCapacityUnits", "TableName", aws_dynamodb_table.experiences.name],
             ["AWS/DynamoDB", "ConsumedWriteCapacityUnits", "TableName", aws_dynamodb_table.experiences.name],
@@ -60,9 +65,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "API Gateway Requests"
-          period = 300
-          stat   = "Sum"
+          title   = "API Gateway Requests"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Sum"
           metrics = [
             ["AWS/ApiGateway", "Count", "ApiName", aws_api_gateway_rest_api.pathmentor_api.name],
           ]
@@ -71,9 +77,10 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
       {
         type = "metric"
         properties = {
-          title  = "API Gateway 5XX Errors"
-          period = 300
-          stat   = "Sum"
+          title   = "API Gateway 5XX Errors"
+          region  = var.aws_region
+          period  = 300
+          stat    = "Sum"
           metrics = [
             ["AWS/ApiGateway", "5XXError", "ApiName", aws_api_gateway_rest_api.pathmentor_api.name],
           ]
@@ -82,6 +89,7 @@ resource "aws_cloudwatch_dashboard" "pathmentor" {
     ]
   })
 }
+*/
 
 # ── CloudWatch Alarms ─────────────────────────────────────────────────────────
 
