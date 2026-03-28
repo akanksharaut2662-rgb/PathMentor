@@ -176,9 +176,9 @@ def handler(event, context):
         # Build the prompt
         prompt = build_prompt(body, experiences)
 
-        # Call Amazon Bedrock — Claude 3 Sonnet
+        # Call Amazon Bedrock — Claude 3 Haiku
         bedrock = get_bedrock_client()
-        model_id = os.environ.get("BEDROCK_MODEL_ID", "anthropic.claude-3-sonnet-20240229-v1:0")
+        model_id = os.environ.get("BEDROCK_MODEL_ID", "anthropic.claude-3-haiku-20240307-v1:0")
 
         bedrock_body = {
             "anthropic_version": "bedrock-2023-05-31",

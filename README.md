@@ -101,7 +101,7 @@ Find your account ID: AWS Console → top-right menu → Account ID.
 
 1. Go to **AWS Console → Amazon Bedrock → Model Access**
 2. Click **Manage model access**
-3. Enable **Claude 3 Sonnet** (`anthropic.claude-3-sonnet-20240229-v1:0`)
+3. Enable **Claude 3 Haiku** (`anthropic.claude-3-haiku-20240307-v1:0`)
 4. Wait for status = **Access granted** (takes ~1 minute)
 
 ### Step 4 — Provision all infrastructure

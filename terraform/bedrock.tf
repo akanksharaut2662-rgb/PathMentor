@@ -6,7 +6,7 @@
 # IMPORTANT: Before deploying, you MUST manually enable model access:
 #   1. Go to AWS Console → Amazon Bedrock → Model Access
 #   2. Click "Manage model access"
-#   3. Enable: "Claude 3 Sonnet" (anthropic.claude-3-sonnet-20240229-v1:0)
+#   3. Enable: "Claude 3 Haiku" (anthropic.claude-3-haiku-20240307-v1:0)
 #   4. Click "Save changes" and wait for status = "Access granted"
 #
 # The Lambda function (generate_plan.py) calls Bedrock via the LabRole,
